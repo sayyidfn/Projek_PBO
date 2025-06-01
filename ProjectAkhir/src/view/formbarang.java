@@ -1,6 +1,6 @@
 package view;
 
-import controller.BarangController;
+import controller.ControllerBarang;
 import model.barang;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +20,7 @@ public class formbarang extends javax.swing.JFrame {
     }
 
     private void loadTable() {
-        List<barang> list = BarangController.getAllBarang();
+        List<barang> list = ControllerBarang.getAllBarang();
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"ID", "Kode", "Nama", "Harga", "Stok", "Kategori"});
 
@@ -49,7 +49,7 @@ public class formbarang extends javax.swing.JFrame {
             Integer.parseInt(txtstok.getText()),
             txtkategori.getText()
         );
-        BarangController.insertBarang(b);
+        ControllerBarang.insertBarang(b);
         loadTable();
         resetForm();
     }
@@ -64,7 +64,7 @@ public class formbarang extends javax.swing.JFrame {
                 txtkategori.getText()
             );
             b.setId(selectedId);
-            BarangController.updateBarang(b);
+            ControllerBarang.updateBarang(b);
             loadTable();
             resetForm();
         }
@@ -72,7 +72,7 @@ public class formbarang extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {
         if (selectedId != -1) {
-            BarangController.deleteBarang(selectedId);
+            ControllerBarang.deleteBarang(selectedId);
             loadTable();
             resetForm();
         }
