@@ -10,4 +10,11 @@ package Model.Login;
  */
 public interface InterfaceDAOLogin {
     public void insert(ModelLogin login);
+
+    /**
+     *
+     * @param login
+     * @return
+     */
+    public boolean cekLogin(ModelLogin login);
 }

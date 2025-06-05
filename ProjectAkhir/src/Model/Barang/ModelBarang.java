@@ -12,7 +12,17 @@ public class ModelBarang {
     private Integer id_barang, stok;
     private String kode, nama, kategori;
     private Double harga;
+    
+    public ModelBarang(){}
 
+    public ModelBarang(Integer stok, String kode, String nama, String kategori, Double harga) {
+        this.stok = stok;
+        this.kode = kode;
+        this.nama = nama;
+        this.kategori = kategori;
+        this.harga = harga;
+    }
+    
     public Integer getId_barang() {
         return id_barang;
     }

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Connector;
 import Model.Barang.*;
+import view.DataBarang
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,17 @@ public class ControllerBarang {
     InterfaceDAOBarang daoBarang;
     List<ModelBarang> daftarBarang;
     
+<<<<<<< Updated upstream
     
     public ControllerBarang(DataBarang dataBarang) {
+=======
+    public ControllerBarang(DataBarang dataBarang){
+>>>>>>> Stashed changes
         this.dataBarang = dataBarang;
         daoBarang = new DAOBarang();
         daftarBarang = daoBarang.getAll();
     }
+<<<<<<< Updated upstream
 
     public void showAllBarang () {
         daftarBarang = daoBarang.getAll();
@@ -119,6 +125,20 @@ public class ControllerBarang {
         dataBarang.getInputNama().setText(nama);
         dataBarang.getInputHarga().setText(harga);
         dataBarang.getInputStok().setText(stok);
+=======
+    
+    public void insertBarang(){
+        try {
+            ModelBarang barangBaru =  new ModelBarang();
+            
+            String kode =  dataBarang.getI
+            
+        } catch (Exception e) {
+        }
+    
+>>>>>>> Stashed changes
     }
+  
+    
 }
 }

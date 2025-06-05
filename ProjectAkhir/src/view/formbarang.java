@@ -1,7 +1,7 @@
 package view;
 
 import controller.ControllerBarang;
-import model.barang;
+import Model.Barang.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,13 +20,13 @@ public class formbarang extends javax.swing.JFrame {
     }
 
     private void loadTable() {
-        List<barang> list = ControllerBarang.getAllBarang();
+        List<ModelBarang> listBarang = ControllerBarang.getAllBarang();
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{"ID", "Kode", "Nama", "Harga", "Stok", "Kategori"});
 
-        for (barang b : list) {
+        for (ModelBarang barang : listBarang) {
             model.addRow(new Object[]{
-                b.getId(), b.getKode(), b.getNama(), b.getHarga(), b.getStok(), b.getKategori()
+                barang.getId_barang(), barang.getKode(), barang.getNama(), barang.getHarga(), barang.getStok(), barang.getKategori()
             });
         }
         tblbarang.setModel(model);
@@ -42,29 +42,29 @@ public class formbarang extends javax.swing.JFrame {
     }
 
     private void btnTambahActionPerformed() {
-        barang b = new barang(
-            txtkode.getText(),
-                txtnama.getText(),
-            Double.parseDouble(txtharga.getText()),
+        ModelBarang barang = new ModelBarang(
             Integer.parseInt(txtstok.getText()),
-            txtkategori.getText()
+            txtkode.getText(),
+            txtnama.getText(),
+            txtkategori.getText(),
+            Double.parseDouble(txtharga.getText())
         );
-        ControllerBarang.insertBarang(b);
+        ControllerBarang.insertBarang(barang);
         loadTable();
         resetForm();
     }
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
         if (selectedId != -1) {
-            barang b = new barang(
+            ModelBarang barang = new ModelBarang(
+                Integer.parseInt(txtstok.getText()),
                 txtkode.getText(),
                 txtnama.getText(),
-                Double.parseDouble(txtharga.getText()),
-                Integer.parseInt(txtstok.getText()),
-                txtkategori.getText()
+                txtkategori.getText(),
+                Double.parseDouble(txtharga.getText())
             );
-            b.setId(selectedId);
-            ControllerBarang.updateBarang(b);
+            barang.setId_barang(selectedId);
+            ControllerBarang.updateBarang(barang);
             loadTable();
             resetForm();
         }

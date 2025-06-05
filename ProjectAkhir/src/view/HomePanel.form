@@ -28,7 +28,7 @@
                           <Component id="btnInputTransaksi" max="32767" attributes="0"/>
                           <Component id="btnDataBarang" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                           <Component id="btnLogout" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnLihatTransaksi" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDataTransaksi" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -46,7 +46,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnInputTransaksi" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnLihatTransaksi" min="-2" max="-2" attributes="0"/>
+              <Component id="btnDataTransaksi" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="89" max="32767" attributes="0"/>
@@ -70,10 +70,13 @@
         <Property name="text" type="java.lang.String" value="INPUT TRANSAKSI"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLihatTransaksi">
+    <Component class="javax.swing.JButton" name="btnDataTransaksi">
       <Properties>
-        <Property name="text" type="java.lang.String" value="LIHAT TRANSAKSI"/>
+        <Property name="text" type="java.lang.String" value="DATA TRANSAKSI"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDataTransaksiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLogout">
       <Properties>

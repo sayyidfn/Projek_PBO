@@ -96,7 +96,7 @@ public class DAOTransaksi implements InterfaceDAOTransaksi{
             // Membuat objek statement yang digunakan untuk melakukan query.
             Statement statement = Connector.Connect().createStatement();
 
-            String query = "SELECT * FROM transaksi;";
+            String query = "SELECT FROM transaksi;";
 
             // Mengeksekusi query dan menyimpannya ke dalam variabel "resultSet".
             ResultSet resultSet = statement.executeQuery(query);

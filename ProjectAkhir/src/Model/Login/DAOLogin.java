@@ -39,4 +39,23 @@ public class DAOLogin implements InterfaceDAOLogin{
             System.out.println("Input Failed: " + e.getLocalizedMessage());
         }
     }
+    
+    @Override
+    public boolean cekLogin(ModelLogin login){
+        try {
+             String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            
+            PreparedStatement statement = Connector.Connect().prepareStatement(query);
+            statement.setString(1, login.getUsername());
+            statement.setString(2, login.getPassword());
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            return resultSet.next();
+            
+        } catch (Exception e) {
+            System.out.println("Eror saat login: " + e.getLocalizedMessage());
+            return false;
+        }
+    }
 }

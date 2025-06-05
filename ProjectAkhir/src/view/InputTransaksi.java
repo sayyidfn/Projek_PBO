@@ -211,7 +211,7 @@ public class InputTransaksi extends javax.swing.JPanel {
     }         
      
      private void btnLihatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        LihatTransaksi lihatTransaksi = new LihatTransaksi(); 
+        TransaksiFrame lihatTransaksi = new TransaksiFrame(); 
         lihatTransaksi.setVisible(true); 
         this.dispose(); 
      }
