@@ -15,8 +15,12 @@ public class ControllerBarang {
     List<ModelBarang> daftarBarang;
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
     public ControllerBarang(DataBarang dataBarang) {
+=======
+    public ControllerBarang(DataBarang dataBarang){
+>>>>>>> Stashed changes
 =======
     public ControllerBarang(DataBarang dataBarang){
 >>>>>>> Stashed changes
@@ -24,6 +28,7 @@ public class ControllerBarang {
         daoBarang = new DAOBarang();
         daftarBarang = daoBarang.getAll();
     }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
     public void showAllBarang () {
@@ -126,6 +131,8 @@ public class ControllerBarang {
         dataBarang.getInputHarga().setText(harga);
         dataBarang.getInputStok().setText(stok);
 =======
+=======
+>>>>>>> Stashed changes
     
     public void insertBarang(){
         try {
@@ -136,9 +143,15 @@ public class ControllerBarang {
         } catch (Exception e) {
         }
     
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     }
   
     
 }
+=======
+    }
+  
+    
+>>>>>>> Stashed changes
 }

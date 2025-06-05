@@ -1,7 +1,10 @@
 package view;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 import Model.Connector;
 import Model.Barang.*;
 import java.sql.Connection;
@@ -194,6 +197,7 @@ public class DataBarang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
      private void resetInputFields() {
         InputKode.setText("");
         InputNama.setText("");
@@ -252,6 +256,30 @@ public class DataBarang extends javax.swing.JFrame {
         HomePanel home = new HomePanel();
         home.setVisible(true);
         this.dispose(); 
+=======
+    public javax.swing.JTextField getInputKode() {
+        return InputKode;
+    }
+    
+    public javax.swing.JTextField getInputNama() {
+        return InputNama;
+    }
+    
+    public javax.swing.JTextField getInputHarga() {
+        return InputHarga;
+    }
+    
+    public javax.swing.JTextField getInputStok() {
+        return InputStok;
+    }
+    
+    public javax.swing.JTextField getInputKategori() {
+        return InputKategori;
+    }
+    
+    public javax.swing.JTable getTableLihatTransaksi() {
+        return LihatTransaksi; 
+>>>>>>> Stashed changes
 =======
     public javax.swing.JTextField getInputKode() {
         return InputKode;

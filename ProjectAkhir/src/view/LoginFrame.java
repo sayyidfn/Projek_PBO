@@ -71,6 +71,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,6 +159,9 @@ public class LoginFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, message);
     }
     
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     /**
      * @param args the command line arguments
