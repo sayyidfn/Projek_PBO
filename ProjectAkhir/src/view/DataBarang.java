@@ -234,7 +234,7 @@ public class DataBarang extends javax.swing.JFrame {
     }
     
     public javax.swing.JTable getTableBarang() {
-        return ; 
+        return TabelBarang; 
     }
     
          private void backToHome() {
