@@ -1,84 +1,124 @@
-package controller;
+package Controller;
 
 import Model.Connector;
 import Model.Barang.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import view.DataBarang;
 
 public class ControllerBarang {
+    DataBarang dataBarang;
+    InterfaceDAOBarang daoBarang;
+    List<ModelBarang> daftarBarang;
+    
+    
+    public ControllerBarang(DataBarang dataBarang) {
+        this.dataBarang = dataBarang;
+        daoBarang = new DAOBarang();
+        daftarBarang = daoBarang.getAll();
+    }
 
-    public static List<ModelBarang> getAllBarang() {
-        List<ModelBarang> list = new ArrayList<>();
-        try (Connection conn = Connector.Connect();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery("SELECT * FROM barang")) {
+    public void showAllBarang () {
+        daftarBarang = daoBarang.getAll();
+        ModelTable table = new ModelTable(daftarBarang);
+    }
 
-            while (rs.next()) {
-                ModelBarang barang = new ModelBarang();
-                barang.setId_barang(rs.getInt("id"));
-                barang.setKode(rs.getString("kode"));
-                barang.setNama(rs.getString("nama"));
-                barang.setHarga(rs.getDouble("harga"));
-                barang.setStok(rs.getInt("stok"));
-                barang.setKategori(rs.getString("kategori"));
-                list.add(barang);
+    public void insertBarang() {
+        try {
+            ModelBarang modelBarang = new ModelBarang();
+            
+        String kode = dataBarang.getInputKode().getText();
+        String nama = dataBarang.getInputNama().getText();
+        Double harga = Double.parseDouble(dataBarang.getInputHarga().getText());
+        Integer stok = Integer.parseInt(dataBarang.getInputStok().getText());
+        String kategori = dataBarang.getInputKategori().getText();
+        
+        if("".equals(nama)||"".equals(kode)||"".equals(harga)||"".equals(stok)||"".equals(kategori)){
+        throw new Exception("tidak boleh ada yang kosong!");
+        }
+        
+        modelBarang.setKode(kode);
+        modelBarang.setNama(nama);
+        modelBarang.setHarga(harga);
+        modelBarang.setStok(stok);
+        modelBarang.setKategori(kategori);
+        daoBarang.insert(modelBarang);
+        JOptionPane.showMessageDialog(null,"Data Berhasil di Tambahkan!!");
+        showAllBarang();
+        reset();
+        
+        } catch (Exception e) {
+           JOptionPane.showMessageDialog(null,"Error saat menambahkan :"+e.getMessage());
+        }
+    }
+    public void editbarang() {
+            int selectedRow = dataBarang.getTableBarang().getSelectedRow();
+            if (selectedRow != -1) {
+                try {
+                    int idTransaksi = (int) dataBarang.getTableBarang().getValueAt(selectedRow, 0);
+                    ModelBarang update = new ModelBarang();
+                    String kode = dataBarang.getInputKode().getText();
+                    String nama = dataBarang.getInputNama().getText();
+                    Double harga = Double.parseDouble(dataBarang.getInputHarga().getText());
+                    Integer stok = Integer.parseInt(dataBarang.getInputStok().getText());
+                    String kategori = dataBarang.getInputKategori().getText();
+
+                    if("".equals(nama)||"".equals(kode)||"".equals(harga)||"".equals(stok)||"".equals(kategori)){
+                    throw new Exception("tidak boleh ada yang kosong!");
+                    }
+
+                    update.setKode(kode);
+                    update.setNama(nama);
+                    update.setHarga(harga);
+                    update.setStok(stok);
+                    update.setKategori(kategori);
+                    daoBarang.update(update);
+                    JOptionPane.showMessageDialog(null, "Data berhasil diupdate");
+                    showAllBarang();
+                    reset();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error saat mengupdate: " + e.getMessage());
+                }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return list;
-    }
 
-    public static void insertBarang(ModelBarang barang) {
-        String sql = "INSERT INTO barang (kode, nama, harga, stok, kategori) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = Connector.Connect();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, barang.getKode());
-            ps.setString(2, barang.getNama());
-            ps.setDouble(3, barang.getHarga());
-            ps.setInt(4, barang.getStok());
-            ps.setString(5, barang.getKategori());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Input Failed: " + e.getLocalizedMessage());
-            e.printStackTrace();
+         public void deleteTransaksi() {
+            int selectedRow = dataBarang.getTableBarang().getSelectedRow();
+            if (selectedRow != -1) {
+                int idBarang = (int) dataBarang.getTableBarang().getValueAt(selectedRow, 0);
+                daoBarang.delete(idBarang);
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                showAllBarang();
+                reset();
+            }
         }
-    }
 
-    public static void updateBarang(ModelBarang barang) {
-        String sql = "UPDATE barang SET kode=?, nama=?, harga=?, stok=?, kategori=? WHERE id=?";
-        try (Connection conn = Connector.Connect();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, barang.getKode());
-            ps.setString(2, barang.getNama());
-            ps.setDouble(3, barang.getHarga());
-            ps.setInt(4, barang.getStok());
-            ps.setString(5, barang.getKategori());
-            ps.setInt(6, barang.getId_barang());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Update Failed! (" + e.getLocalizedMessage() + ")");
-            e.printStackTrace();
+        public void reset() {
+            
+            dataBarang.getInputKode().setText("");
+            dataBarang.getInputNama().setText("");
+            dataBarang.getInputHarga().setText("");
+            dataBarang.getInputStok().setText("");
+            dataBarang.getInputKategori().setText("");
         }
+
+        public void isiFieldDariTable() {
+            int selectedRow = dataBarang.getTableBarang().getSelectedRow();
+            if (selectedRow != -1) {
+        // Ambil data dari table berdasarkan baris yang dipilih
+        String kode = dataBarang.getTableBarang().getValueAt(selectedRow, 0).toString();
+        String nama = dataBarang.getTableBarang().getValueAt(selectedRow, 1).toString();
+        String harga = dataBarang.getTableBarang().getValueAt(selectedRow, 2).toString();
+        String stok = dataBarang.getTableBarang().getValueAt(selectedRow, 3).toString();
+        String kategori = dataBarang.getTableBarang().getValueAt(selectedRow, 4).toString();
+
+        // Set isi TextField di form
+        dataBarang.getInputKode().setText(kode);
+        dataBarang.getInputNama().setText(nama);
+        dataBarang.getInputHarga().setText(harga);
+        dataBarang.getInputStok().setText(stok);
     }
-
-    public static void deleteBarang(int id_barang) {
-        String sql = "DELETE FROM barang WHERE id=?";
-        try (Connection conn = Connector.Connect();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, id_barang);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println("Delete Failed: " + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
-    }
+}
 }
